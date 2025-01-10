@@ -1,3 +1,1 @@
-export function secretManager(): string {
-  return 'secret-manager';
-}
+export abstract class SecretManager {}
