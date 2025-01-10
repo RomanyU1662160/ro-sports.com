@@ -1,0 +1,29 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2020", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@ro-app/aws-serverless": [
+        "packages/shared-libs/aws-serverless/src/index.ts"
+      ],
+      "@ro-app/http-client": ["packages/shared-libs/http-client/src/index.ts"],
+      "@ro-app/pino-logger": ["packages/shared-libs/pino-logger/src/index.ts"],
+      "@ro-app/secret-manager": [
+        "packages/shared-libs/secret-manager/src/index.ts"
+      ]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}
