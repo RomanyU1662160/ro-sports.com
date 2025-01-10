@@ -1,0 +1,20 @@
+{
+  "name": "pino-logger",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/shared-libs/pino-logger/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/shared-libs/pino-logger",
+        "tsConfig": "packages/shared-libs/pino-logger/tsconfig.lib.json",
+        "packageJson": "packages/shared-libs/pino-logger/package.json",
+        "main": "packages/shared-libs/pino-logger/src/index.ts",
+        "assets": ["packages/shared-libs/pino-logger/*.md"]
+      }
+    }
+  }
+}

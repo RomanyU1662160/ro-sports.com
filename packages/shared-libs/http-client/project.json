@@ -1,0 +1,20 @@
+{
+  "name": "http-client",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/shared-libs/http-client/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/shared-libs/http-client",
+        "tsConfig": "packages/shared-libs/http-client/tsconfig.lib.json",
+        "packageJson": "packages/shared-libs/http-client/package.json",
+        "main": "packages/shared-libs/http-client/src/index.ts",
+        "assets": ["packages/shared-libs/http-client/*.md"]
+      }
+    }
+  }
+}
