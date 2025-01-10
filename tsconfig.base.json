@@ -20,6 +20,9 @@
         "packages/shared-libs/aws-serverless/src/index.ts"
       ],
       "@ro-app/http-client": ["packages/shared-libs/http-client/src/index.ts"],
+      "@ro-app/middy-middlewares": [
+        "packages/shared-libs/middy-middlewares/src/index.ts"
+      ],
       "@ro-app/pino-logger": ["packages/shared-libs/pino-logger/src/index.ts"],
       "@ro-app/secret-manager": [
         "packages/shared-libs/secret-manager/src/index.ts"
