@@ -1,0 +1,20 @@
+{
+  "name": "secret-manager",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/shared-libs/secret-manager/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/shared-libs/secret-manager",
+        "tsConfig": "packages/shared-libs/secret-manager/tsconfig.lib.json",
+        "packageJson": "packages/shared-libs/secret-manager/package.json",
+        "main": "packages/shared-libs/secret-manager/src/index.ts",
+        "assets": ["packages/shared-libs/secret-manager/*.md"]
+      }
+    }
+  }
+}
