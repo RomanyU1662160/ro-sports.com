@@ -10,6 +10,8 @@
   },
   "private": true,
   "dependencies": {
+    "@aws-sdk/client-secrets-manager": "^3.726.0",
+    "aws-sdk-client-mock": "^4.1.0",
     "axios": "^1.7.9",
     "axios-retry": "^4.5.0",
     "http-status-codes": "^2.3.0"
