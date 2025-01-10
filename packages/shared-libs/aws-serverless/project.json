@@ -1,0 +1,20 @@
+{
+  "name": "aws-serverless",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/shared-libs/aws-serverless/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/shared-libs/aws-serverless",
+        "tsConfig": "packages/shared-libs/aws-serverless/tsconfig.lib.json",
+        "packageJson": "packages/shared-libs/aws-serverless/package.json",
+        "main": "packages/shared-libs/aws-serverless/src/index.ts",
+        "assets": ["packages/shared-libs/aws-serverless/*.md"]
+      }
+    }
+  }
+}
