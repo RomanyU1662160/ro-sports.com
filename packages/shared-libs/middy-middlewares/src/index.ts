@@ -1,1 +1,1 @@
-export * from './lib/middy-middlewares';
+export * from './logger-middleware';

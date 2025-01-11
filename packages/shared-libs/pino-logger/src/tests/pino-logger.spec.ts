@@ -1,5 +1,5 @@
 // First, move the jest.mock call to the top, before any imports
-jest.mock('./pino-logger', () => ({
+jest.mock('../pino-logger', () => ({
   logger: {
     info: jest.fn(),
     error: jest.fn(),
@@ -10,7 +10,7 @@ jest.mock('./pino-logger', () => ({
 // In Jest, mocks need to be defined before the module is imported to be effective.
 // This is why the jest.mock call is moved to the top of the file.
 // This way, the logger object is mocked before it is imported in the test file.
-import { logger } from './pino-logger';
+import { logger } from '../pino-logger';
 
 describe('logger', () => {
   beforeAll(() => {
@@ -73,7 +73,7 @@ describe('logger configuration', () => {
   it('should use default log level when LOG_LEVEL is not set', () => {
     delete process.env.LOG_LEVEL;
     jest.isolateModules(() => {
-      const { logger } = require('./pino-logger');
+      const { logger } = require('../pino-logger');
       expect(logger).toBeDefined();
     });
   });
@@ -81,7 +81,7 @@ describe('logger configuration', () => {
   it('should use custom log level when LOG_LEVEL is set', () => {
     process.env.LOG_LEVEL = 'debug';
     jest.isolateModules(() => {
-      const { logger } = require('./pino-logger');
+      const { logger } = require('../pino-logger');
       expect(logger).toBeDefined();
     });
   });

@@ -1,1 +1,1 @@
-export * from './lib/pino-logger';
+export * from './pino-logger';
