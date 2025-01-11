@@ -1,7 +1,8 @@
 import { Request } from '@middy/core';
 import { logger } from '@ro-app/pino-logger';
+import { redactSensitiveData } from './utils/redactFields';
 
-type MiddleWareConfig = {
+export type MiddleWareConfig = {
   message: string | Record<string, unknown>;
   level?: 'info' | 'error' | 'warn' | 'debug';
   data?: Record<string, unknown>;
@@ -19,7 +20,7 @@ export const loggerMiddleware = <TEvent = unknown, TResult = unknown>(
     logger.info({
       type: 'REQUEST',
       message: options.message,
-      data: options.data,
+      data: redactSensitiveData(options.data),
       event: request.event,
       invocationID: request.context.invocationId,
     });
@@ -29,7 +30,7 @@ export const loggerMiddleware = <TEvent = unknown, TResult = unknown>(
     logger.info({
       type: 'RESPONSE',
       message: options.message,
-      data: options.data,
+      data: redactSensitiveData(options.data),
       event: request.event,
       invocationID: request.context.invocationId,
     });
@@ -38,7 +39,7 @@ export const loggerMiddleware = <TEvent = unknown, TResult = unknown>(
     logger.error({
       type: 'ERROR',
       message: options.message,
-      data: options.data,
+      data: redactSensitiveData(options.data),
       event: request.event,
       invocationID: request.context.invocationId,
     });
