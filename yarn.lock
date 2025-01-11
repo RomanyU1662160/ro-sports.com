@@ -1880,6 +1880,11 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
+"@loft-orbital/terraform@^0.1.7":
+  version "0.1.7"
+  resolved "https://registry.yarnpkg.com/@loft-orbital/terraform/-/terraform-0.1.7.tgz#e3f826dc5ed9b2aab6076681a0ba596d39b695c5"
+  integrity sha512-dEp/rHs8H9ObSHtAQPQKfKeht7wSp0M8BDz5VoYxpwTE8vAieUcXVKw+u4vAYYE7wFFLEqO1wE7tZonOYbU36A==
+
 "@middy/core@^6.0.0":
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/@middy/core/-/core-6.0.0.tgz#f1ecbe9809816cc8f5d08a69311861f0103387d6"
@@ -1914,6 +1919,28 @@
   dependencies:
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
+
+"@nrwl/devkit@19.8.4", "@nrwl/devkit@^19.8.4":
+  version "19.8.4"
+  resolved "https://registry.yarnpkg.com/@nrwl/devkit/-/devkit-19.8.4.tgz#19fbf56854d11fa6b12431b8f9c51999099cf3e2"
+  integrity sha512-OoIqDjj2mWzLs3aSF6w5OiC2xywYi/jBxHc7t7Lyi56Vc4dQq8vJMELa9WtG6qH0k05fF7N+jAoKlfvLgbbEFA==
+  dependencies:
+    "@nx/devkit" "19.8.4"
+
+"@nx/devkit@19.8.4":
+  version "19.8.4"
+  resolved "https://registry.yarnpkg.com/@nx/devkit/-/devkit-19.8.4.tgz#b814d2c41e99fee305d14895520a785ac010ecce"
+  integrity sha512-FPFT8gVDFRSEmU0n7nRkT4Rnqy7OMznfPXLfDZtVuzEi5Cl6ftG3UBUvCgJcJFCYJVAZAUuv6vRSRarHd51XFQ==
+  dependencies:
+    "@nrwl/devkit" "19.8.4"
+    ejs "^3.1.7"
+    enquirer "~2.3.6"
+    ignore "^5.0.4"
+    minimatch "9.0.3"
+    semver "^7.5.3"
+    tmp "~0.2.1"
+    tslib "^2.3.0"
+    yargs-parser "21.1.1"
 
 "@nx/devkit@20.3.1":
   version "20.3.1"

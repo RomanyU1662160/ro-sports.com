@@ -22,6 +22,8 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.8.0",
+    "@loft-orbital/terraform": "^0.1.7",
+    "@nrwl/devkit": "^19.8.4",
     "@nx/esbuild": "20.3.1",
     "@nx/eslint": "20.3.1",
     "@nx/eslint-plugin": "20.3.1",

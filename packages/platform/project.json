@@ -1,0 +1,26 @@
+{
+  "name": "platform",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "packages/platform/src",
+  "targets": {
+    "initialize": {
+      "executor": "@loft-orbital/terraform:init",
+      "outputs": [
+        "{projectRoot}/src/.terraform",
+        "{projectRoot}/src/.terraform.lock.hcl"
+      ]
+    },
+    "lint": {
+      "executor": "@loft-orbital/terraform:fmt",
+      "options": {
+        "check": true
+      }
+    },
+    "validate": {
+      "executor": "@loft-orbital/terraform:validate",
+      "dependsOn": ["initialize"]
+    }
+  },
+  "tags": []
+}
