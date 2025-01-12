@@ -1,1 +1,2 @@
-export * from './lib/event-schemas';
+export * from './common/baseEvent';
+export * from './common/errorSchema';
