@@ -11,7 +11,7 @@
       "defaultConfiguration": "production",
       "options": {
         "platform": "node",
-        "outputPath": "dist/apps/onestock-connector",
+        "outputPath": "dist",
         "format": ["cjs"],
         "bundle": false,
         "main": "apps/onestock-connector/src/main.ts",

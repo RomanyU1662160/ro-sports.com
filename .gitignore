@@ -7,7 +7,8 @@ out-tsc
 .yarn/*
 # dependencies
 node_modules
-
+.terraform
+.terraform.lock.hcl
 # IDEs and editors
 /.idea
 .project
