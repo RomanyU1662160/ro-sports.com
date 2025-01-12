@@ -17,16 +17,15 @@ variable "aws_region" {
 variable "project_name" {
   description = "The name of the project"
   type        = string
-  default     = "ro-sports-club-dev"
+  default     = "ro-sports-club-stg"
 }
-variable "SQS_queue_name" {
-  description = "The name of the SQS queue"
+
+variable "s3_bucket_name" {
+  description = "The name of the S3 bucket to store the Terraform state file"
   type        = string
 }
 
-variable "runtime" {
-  description = "The runtime for the Lambda function"
+variable "dynamodb_table_name" {
+  description = "The name of the DynamoDB table to store the Terraform state lock"
   type        = string
 }
-
-
