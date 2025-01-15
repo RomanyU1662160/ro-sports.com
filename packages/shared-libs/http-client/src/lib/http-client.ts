@@ -4,11 +4,11 @@ import axios, {
   AxiosRequestConfig,
   AxiosResponse,
 } from 'axios';
-import axiosRetry from 'axios-retry';
+import axiosRetry, { IAxiosRetryConfig } from 'axios-retry';
 import { StatusCodes } from 'http-status-codes';
 
 export interface IHttpClient {
-  request<T>(config: AxiosRequestConfig): Promise<AxiosResponse<T>>;
+  request<T>(config: AxiosRequestConfig): Promise<T>;
 }
 export abstract class BaseHttpClient implements IHttpClient {
   protected readonly client: AxiosInstance;
@@ -16,15 +16,22 @@ export abstract class BaseHttpClient implements IHttpClient {
 
   protected abstract handleError(error: AxiosError): never;
 
-  constructor(baseConfig: AxiosRequestConfig = {}) {
+  constructor(
+    baseConfig: AxiosRequestConfig = {},
+    retryConfig: IAxiosRetryConfig = {
+      retries: 3,
+      retryDelay: axiosRetry.exponentialDelay,
+    }
+  ) {
     this.config = baseConfig;
     this.client = axios.create({ timeout: 10000, ...baseConfig });
-    this.setUpRetry();
+    this.setUpRetry(retryConfig);
   }
 
   // Configure retry behavior
-  private setUpRetry() {
+  private setUpRetry(retryConfig: IAxiosRetryConfig) {
     axiosRetry(this.client, {
+      ...retryConfig,
       retries: 3,
       retryDelay: axiosRetry.exponentialDelay,
 
