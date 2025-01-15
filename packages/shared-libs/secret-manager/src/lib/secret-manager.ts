@@ -10,6 +10,7 @@ export abstract class BaseSecretManager<T> {
 
   protected abstract getSecretName(): string;
   protected abstract validateSecret(secret: T): boolean;
+  protected abstract getInstance(): BaseSecretManager<T>;
 
   constructor(ttl = 1) {
     this.cache = new Map();

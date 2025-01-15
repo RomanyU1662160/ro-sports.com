@@ -14,7 +14,7 @@ export abstract class BaseHttpClient implements IHttpClient {
   protected readonly client: AxiosInstance;
   protected config: AxiosRequestConfig;
 
-  protected abstract handleError(error: AxiosError): Promise<never>;
+  protected abstract handleError(error: AxiosError): never;
 
   constructor(baseConfig: AxiosRequestConfig = {}) {
     this.config = baseConfig;
