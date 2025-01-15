@@ -1,0 +1,27 @@
+{
+  "name": "clients",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/clients/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/clients",
+        "tsConfig": "packages/clients/tsconfig.lib.json",
+        "packageJson": "packages/clients/package.json",
+        "main": "packages/clients/src/index.ts",
+        "assets": ["packages/clients/*.md"]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "packages/clients/jest.config.ts"
+      }
+    }
+  }
+}
