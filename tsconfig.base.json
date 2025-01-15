@@ -19,6 +19,7 @@
       "@ro-app/aws-serverless": [
         "packages/shared-libs/aws-serverless/src/index.ts"
       ],
+      "@ro-app/clients": ["packages/clients/src/index.ts"],
       "@ro-app/event-schemas": ["packages/event-schemas/src/index.ts"],
       "@ro-app/http-client": ["packages/shared-libs/http-client/src/index.ts"],
       "@ro-app/middy-middlewares": [
