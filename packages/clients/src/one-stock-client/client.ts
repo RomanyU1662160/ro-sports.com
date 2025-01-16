@@ -1,6 +1,6 @@
 import { BaseHttpClient } from '@ro-app/http-client';
 import { logger } from '@ro-app/pino-logger';
-import { AxiosError, AxiosInstance } from 'axios';
+import { AxiosError } from 'axios';
 import { OneStockError } from './onestock-error';
 import { IOneStockSecretConfig, OneStockSecretManager } from './secret-manager';
 
@@ -33,15 +33,42 @@ export class OneStockClient extends BaseHttpClient {
   }
 
   private async setupAxiosClient(secret: IOneStockSecretConfig): Promise<void> {
-    this.client.defaults.baseURL = `${secret.ONESTOCK_BASE_URL}/v2`;
+    const USERNAME_SUFFIX = process.env.ONESTOCK_USER_SUFFIX;
+    const PASSWORD_SUFFIX = process.env.ONESTOCK_PASSWORD_SUFFIX;
+    const URL_SUFFIX = process.env.ONESTOCK_URL_SUFFIX;
+    if (!USERNAME_SUFFIX || !PASSWORD_SUFFIX || !URL_SUFFIX) {
+      logger.error(
+        'Error in OneStockClient',
+        'USERNAME_SUFFIX, PASSWORD_SUFFIX or URL_SUFFIX is not defined in your env file'
+      );
+    }
+    this.client.defaults.baseURL = `${secret.ONESTOCK_BASE_URL}/${URL_SUFFIX}`;
     this.client.defaults.headers['Content-Type'] = 'application/json';
     this.client.defaults.headers['Accept'] = 'application/json';
     this.client.defaults.headers[
       'Auth-User'
-    ] = `${secret.ONESTOCK_USERNAME}@jdplc.com`;
+    ] = `${secret.ONESTOCK_USERNAME}${USERNAME_SUFFIX}`;
     this.client.defaults.headers[
       'Auth-Password'
     ] = `${secret.ONESTOCK_PASSWORD}${secret.ONESTOCK_PASSWORD}2211*`;
+
+    /*
+    // We can use the interceptors to set the headers dynamically but we are using the defaults.headers to set the headers statically as above,
+    // This is just an example of how we can set the headers dynamically, we can use this if we want to set the headers dynamically based on the request.
+    // for example if we use tokens in the headers.
+
+    this.client.interceptors.request.use((config) => {
+      config.baseURL = `${secret.ONESTOCK_BASE_URL}/v2`;
+      config.headers['Auth-User'] = `${secret.ONESTOCK_USERNAME}@jdplc.com`;
+      config.headers[
+        'Auth-Password'
+      ] = `${secret.ONESTOCK_PASSWORD}${secret.ONESTOCK_PASSWORD}2211*`;
+      config.headers['Content-Type'] = 'application/json';
+      logger.info(`OneStockClient::Request  ${config.headers}`);
+      console.log('this.client.interceptors.request config:::>>>', config);
+      return config;
+    });
+    */
   }
 
   public static async getInstance(): Promise<OneStockClient> {
