@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { ContactZ, CustomerZ } from '../_common/contact';
 
-export const OrderCreatedOneStockPayLoadZ = z.object({
+export const CreateOrderOneStockPayLoadZ = z.object({
   site_id: z.string(),
   order: z.object({
     id: z.string(),
@@ -87,6 +87,6 @@ export const OrderCreatedOneStockPayLoadZ = z.object({
   }),
 });
 
-export type OrderCreatedOneStockPayLoad = z.infer<
-  typeof OrderCreatedOneStockPayLoadZ
+export type CreateOrderOneStockPayLoad = z.infer<
+  typeof CreateOrderOneStockPayLoadZ
 >;

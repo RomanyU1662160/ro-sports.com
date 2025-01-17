@@ -13,7 +13,7 @@
         "platform": "node",
         "outputPath": "dist",
         "format": ["cjs"],
-        "bundle": false,
+        "bundle": true,
         "main": "apps/onestock-connector/src/main.ts",
         "tsConfig": "apps/onestock-connector/tsconfig.app.json",
         "assets": ["apps/onestock-connector/src/assets"],

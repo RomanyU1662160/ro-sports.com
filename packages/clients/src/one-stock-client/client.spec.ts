@@ -2,7 +2,7 @@
 import { OneStockClient } from './client';
 import { OneStockSecretManager } from './secret-manager';
 import { logger } from '@ro-app/pino-logger';
-import axios, { AxiosError } from 'axios';
+import { AxiosError } from 'axios';
 import { OneStockError } from './onestock-error';
 import { mockClient } from 'aws-sdk-client-mock';
 import {
@@ -10,6 +10,12 @@ import {
   GetSecretValueCommand,
 } from '@aws-sdk/client-secrets-manager';
 
+/*
+The OneStockClient has a dependency on the OneStockSecretManager class.
+ The OneStockSecretManager class is responsible for fetching the secrets from AWS Secrets Manager. The OneStockClient class uses the secrets to set up the axios client and make requests to the OneStock API.
+ We need to mock the OneStockSecretManager class to prevent the OneStockClient from making actual requests to AWS Secrets Manager.
+ We use the mockClient function from the aws-sdk-client-mock library to mock the SecretsManagerClient class.
+ */
 // Mock AWS Secrets Manager
 const secretsManagerMock = mockClient(SecretsManagerClient);
 // jest.mock('axios');

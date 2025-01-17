@@ -16,6 +16,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@ro-app/app-env": ["packages/app-env/src/index.ts"],
       "@ro-app/aws-serverless": [
         "packages/shared-libs/aws-serverless/src/index.ts"
       ],
