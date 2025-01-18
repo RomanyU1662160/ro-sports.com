@@ -39,7 +39,7 @@ export const mapOneStockOrderResponseToOrderCreatedEvent = (
         storeId: order.delivery.destination.address.id,
       },
     },
-
+    delivery_promise: order.delivery_promise,
     orderItems: order.order_items.map((item: OrderItemSchema) => ({
       isPersonalisedItem: item.information.personalised_item,
       lineId: item.id,

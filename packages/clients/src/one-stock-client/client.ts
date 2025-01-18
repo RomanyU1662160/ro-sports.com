@@ -21,7 +21,7 @@ export class OneStockClient extends BaseHttpClient {
   }
 
   protected handleError(error: AxiosError): never {
-    logger.error('Error in OneStockClient', error);
+    logger.error(`Error in OneStockClient ${error}`);
     logger.error(`OneStockClient::HandleError- ${error.message}`);
     throw new OneStockError({
       message: error.message,
@@ -147,15 +147,34 @@ export class OneStockClient extends BaseHttpClient {
     }
   }
 
+  public async simulateOneStockWebhook(
+    data: CreateOrderOneStockPayLoad['order']
+  ): Promise<void> {
+    const APIGateWayURL = process.env.AWS_API_GATEWAY_URL;
+    // this simulate the one stock webhook call when the order is created on onestock on the frontend
+    this.request({
+      method: 'POST',
+      url: APIGateWayURL,
+      data: {
+        order: data,
+      },
+    });
+  }
+
   public async createOrder(
-    order: CreateOrderOneStockPayLoad
+    payload: CreateOrderOneStockPayLoad
   ): Promise<CreateOrderResponse> {
     try {
-      return await this.request<CreateOrderResponse>({
+      const response = await this.request<CreateOrderResponse>({
         url: '/orders',
         method: 'POST',
-        data: order,
+        data: JSON.stringify({
+          site_id: payload.site_id,
+          order: payload.order,
+        }),
       });
+      await this.simulateOneStockWebhook(payload.order);
+      return response;
     } catch (error) {
       logger.error(`OneStockClient::CreateOrder ${error}`);
       this.handleError(error as AxiosError);

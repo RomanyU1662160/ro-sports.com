@@ -22,7 +22,7 @@ export const loggerMiddleware = <TEvent = unknown, TResult = unknown>(
       message: options.message,
       data: redactSensitiveData(options.data),
       event: request.event,
-      invocationID: request.context.invocationId,
+      invocationID: request.context.awsRequestId,
     });
   };
 
@@ -32,7 +32,7 @@ export const loggerMiddleware = <TEvent = unknown, TResult = unknown>(
       message: options.message,
       data: redactSensitiveData(options.data),
       event: request.event,
-      invocationID: request.context.invocationId,
+      invocationID: request.context.awsRequestId,
     });
   };
   const middlewareError = async (request: Request<TEvent, TResult>) => {
@@ -41,7 +41,7 @@ export const loggerMiddleware = <TEvent = unknown, TResult = unknown>(
       message: options.message,
       data: redactSensitiveData(options.data),
       event: request.event,
-      invocationID: request.context.invocationId,
+      invocationID: request.context.awsRequestId,
     });
   };
 
