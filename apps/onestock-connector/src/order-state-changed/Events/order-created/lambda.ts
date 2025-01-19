@@ -5,7 +5,7 @@ import {
   loggerMiddleware,
   validateEventPayloadMiddleware,
 } from '@ro-app/middy-middlewares';
-import { OrderCreatedZ } from '@ro-app/event-schemas';
+import { CreateOrderOneStockPayLoadZ } from '@ro-app/event-schemas';
 
 const dependencies = (): middy.MiddlewareObj<
   APIGatewayEvent,
@@ -38,6 +38,8 @@ export const handler = middy()
     })
   )
   .use(
-    validateEventPayloadMiddleware<AppContext['parsedPayload']>(OrderCreatedZ)
+    validateEventPayloadMiddleware<AppContext['parsedPayload']>(
+      CreateOrderOneStockPayLoadZ
+    )
   )
   .handler(app);

@@ -1,5 +1,5 @@
 import { logger } from '@ro-app/pino-logger';
-import { escapeRegExp, cloneDeepWith } from 'lodash';
+import _ from 'lodash';
 
 const SENSITIVE_KEYS = [
   'password',
@@ -31,7 +31,7 @@ export const redactSensitiveData = <T extends Data>(
   // Handle strings
   if (typeof data === 'string') {
     const pattern = new RegExp(
-      allKeys.map((key) => escapeRegExp(key)).join('|'),
+      allKeys.map((key) => _.escapeRegExp(key)).join('|'),
       'gi'
     );
     return data.replace(pattern, REDACTION_MASK) as T;
@@ -43,7 +43,7 @@ export const redactSensitiveData = <T extends Data>(
   }
   // Handle objects
   if (typeof data === 'object') {
-    return cloneDeepWith(data, (value, key) => {
+    return _.cloneDeepWith(data, (value, key) => {
       // If no key, just return undefined to let cloneDeepWith handle the value
       if (!key) return undefined;
 

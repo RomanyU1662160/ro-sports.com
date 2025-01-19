@@ -4,7 +4,7 @@ import { LineItemGroupZ } from '../_common/line-item-group';
 import { ParcelSchemaZ } from '../_common/parcel';
 import { OrderItemSchemaZ } from '../_common/order-item';
 
-const OneStockGetOrderResponseSchemaZ = z.object({
+export const OneStockGetOrderResponseSchemaZ = z.object({
   id: z.string(),
   customer: z.object({
     external_id: z.string(),

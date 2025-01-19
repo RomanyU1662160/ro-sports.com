@@ -14,7 +14,7 @@
         "outputPath": "dist/apps/onestock-connector",
         "format": ["cjs"],
         "bundle": true,
-        "main": "apps/onestock-connector/src/main.ts",
+        "main": "apps/onestock-connector/src/index.ts",
         "tsConfig": "apps/onestock-connector/tsconfig.app.json",
         "assets": ["apps/onestock-connector/src/assets"],
         "generatePackageJson": true,
@@ -22,9 +22,9 @@
           "sourcemap": true,
           "outExtension": {
             ".js": ".js"
-          },
-          "thirdParty": true
-        }
+          }
+        },
+        "thirdParty": true
       },
       "configurations": {
         "development": {},
@@ -64,6 +64,18 @@
     "docker-build": {
       "dependsOn": ["build"],
       "command": "docker build -f apps/onestock-connector/Dockerfile . -t onestock-connector"
+    },
+    "package": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "echo 'Deploying OneStock Connector...'",
+          "nx run onestock-connector:build",
+          "cd dist/apps/onestock-connector && zip -r lambda.zip *"
+        ],
+        "parallel": false
+      },
+      "dependsOn": ["build"]
     }
   }
 }

@@ -20,7 +20,9 @@ export class OrderService {
     const payload = { ...mockCreateOrderPayload, ...order };
     try {
       const response = await this.oneStockClient.createOrder(payload);
-      logger.info('Successfully created order-OrderService:', response);
+      logger.info(
+        `Successfully created order-OrderService - orderID: ${response.id}`
+      );
       return response;
     } catch (error) {
       logger.error(`Error creating order-OrderService:, ${error}`);
@@ -35,7 +37,7 @@ export class OrderService {
       logger.info('OrderService.processOrderCreatedEvent', order);
 
       const enrichedData = mapOneStockOrderResponseToOrderCreatedEvent(order);
-      logger.info('Successfully enriched data:', enrichedData);
+      console.log('enrichedData:::>>>', enrichedData);
       return enrichedData;
     } catch (error) {
       console.log('error:::>>>', error);

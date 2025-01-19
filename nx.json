@@ -6,7 +6,8 @@
   },
   "targetDefaults": {
     "initialize": {
-      "inputs": ["tfSource"]
+      "inputs": ["tfSource"],
+      "cache": true
     },
     "lint": {
       "inputs": ["tfSource"]
@@ -18,14 +19,11 @@
       "cache": true,
       "dependsOn": ["^build"],
       "inputs": ["default", "^default"]
-    }
-  },
-  "tasksRunnerOptions": {
-    "default": {
-      "runner": "nx/tasks-runners/default",
-      "options": {
-        "cacheableOperations": ["initialize"]
-      }
+    },
+    "@nx/esbuild:esbuild": {
+      "cache": true,
+      "dependsOn": ["^build"],
+      "inputs": ["default", "^default"]
     }
   },
   "plugins": [

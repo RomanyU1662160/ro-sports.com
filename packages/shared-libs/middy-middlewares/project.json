@@ -6,16 +6,31 @@
   "tags": [],
   "targets": {
     "build": {
-      "executor": "@nx/js:tsc",
+      "executor": "@nx/esbuild:esbuild",
       "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/packages/shared-libs/middy-middlewares",
-        "tsConfig": "packages/shared-libs/middy-middlewares/tsconfig.lib.json",
-        "packageJson": "packages/shared-libs/middy-middlewares/package.json",
         "main": "packages/shared-libs/middy-middlewares/src/index.ts",
-        "assets": ["packages/shared-libs/middy-middlewares/*.md"],
-        "format": ["cjs", "esm"],
-        "platform": "node"
+        "outputPath": "dist/packages/shared-libs/middy-middlewares",
+        "outputFileName": "main.js",
+        "tsConfig": "packages/shared-libs/middy-middlewares/tsconfig.lib.json",
+        "platform": "node",
+        "format": ["esm"],
+        "assets": [
+          {
+            "glob": "packages/shared-libs/middy-middlewares/README.md",
+            "input": ".",
+            "output": "."
+          }
+        ]
+      },
+      "configurations": {
+        "development": {
+          "minify": false
+        },
+        "production": {
+          "minify": true
+        }
       }
     }
   }
