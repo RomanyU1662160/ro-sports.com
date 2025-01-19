@@ -1,10 +1,9 @@
 {
-  "name": "@ro-app/event-schemas",
+  "name": "@ro-app/app-env",
   "version": "0.0.1",
   "private": true,
   "dependencies": {
-    "tslib": "^2.3.0",
-    "zod": "^3.24.1"
+    "tslib": "^2.3.0"
   },
   "type": "commonjs",
   "main": "./src/index.js",

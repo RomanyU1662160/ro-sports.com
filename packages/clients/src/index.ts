@@ -1,1 +1,1 @@
-export * from './lib/clients';
+export * from './one-stock-client/client';

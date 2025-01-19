@@ -1,12 +1,12 @@
 import { z } from 'zod';
 import { ContactZ, CustomerZ } from '../_common/contact';
 
-export const OrderCreatedOneStockPayLoadZ = z.object({
+export const CreateOrderOneStockPayLoadZ = z.object({
   site_id: z.string(),
   order: z.object({
-    id: z.string(),
+    id: z.string().optional(),
     types: z.array(z.string()),
-    date: z.string(),
+    date: z.number(),
     information: z.object({
       fully_paid: z.boolean(),
       has_dropshipped_items: z.boolean(),
@@ -21,11 +21,13 @@ export const OrderCreatedOneStockPayLoadZ = z.object({
           zip_code: z.string().optional(),
           regions: z
             .object({
-              country: z.string(),
+              country: z.object({
+                code: z.string(),
+              }),
             })
             .optional(),
+          contact: ContactZ,
         }),
-        contact: ContactZ,
       }),
     }),
     delivery_promise: z
@@ -46,6 +48,10 @@ export const OrderCreatedOneStockPayLoadZ = z.object({
           shipment_number: z.number(),
           status: z.string(),
         }),
+        sent_delivery_option: z.object({
+          eta_start: z.number(),
+          eta_end: z.number(),
+        }),
       })
       .optional(),
     customer: CustomerZ,
@@ -57,10 +63,12 @@ export const OrderCreatedOneStockPayLoadZ = z.object({
         city: z.string(),
         zip_code: z.string(),
         regions: z.object({
-          country: z.string(),
+          country: z.object({
+            code: z.string(),
+          }),
         }),
+        contact: ContactZ,
       }),
-      contact: ContactZ,
     }),
     order_items: z.array(
       z.object({
@@ -87,6 +95,6 @@ export const OrderCreatedOneStockPayLoadZ = z.object({
   }),
 });
 
-export type OrderCreatedOneStockPayLoad = z.infer<
-  typeof OrderCreatedOneStockPayLoadZ
+export type CreateOrderOneStockPayLoad = z.infer<
+  typeof CreateOrderOneStockPayLoadZ
 >;

@@ -1,4 +1,4 @@
-import { has, set, cloneDeep } from 'lodash';
+import _ from 'lodash';
 import { Request } from '@middy/core';
 
 const basicKeys = [
@@ -17,11 +17,11 @@ export const redactSensitiveFieldsMiddleware = <
   TResult = unknown
 >() => {
   const middlewareBefore = async (request: Request<TEvent, TResult>) => {
-    const redactedData = cloneDeep(request.event);
+    const redactedData = _.cloneDeep(request.event);
 
     basicKeys.forEach((field) => {
-      if (has(redactedData, field)) {
-        set(redactedData, field, '********');
+      if (_.has(redactedData, field)) {
+        _.set(redactedData, field, '********');
       }
     });
 

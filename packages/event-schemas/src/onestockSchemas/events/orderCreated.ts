@@ -54,7 +54,38 @@ export const OrderCreatedZ = z.object({
           })
           .optional(),
       }),
-
+      delivery_promise: z
+        .object({
+          original_delivery_option: z
+            .object({
+              carbon_footprint: z.number().optional(),
+              cost: z.number().optional(),
+              cutoff: z.number().optional(),
+              delivery_method: z.string().optional(),
+              destination: z
+                .object({
+                  location: z
+                    .object({
+                      country: z.string(),
+                      zip_code: z.string(),
+                    })
+                    .optional(),
+                  eta_end: z.number().optional(),
+                  eta_start: z.number().optional(),
+                  shipment_number: z.string().optional(),
+                  status: z.string().optional(),
+                })
+                .optional(),
+            })
+            .optional(),
+          sent_delivery_option: z
+            .object({
+              eta_end: z.number().optional(),
+              eta_start: z.number().optional(),
+            })
+            .optional(),
+        })
+        .optional(),
       orderItems: z.array(
         z.object({
           isPersonalisedItem: z

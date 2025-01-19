@@ -26,7 +26,6 @@ export abstract class BaseSecretManager<T> {
 
   async getSecret(forceRefresh = false): Promise<T> {
     const secretName = this.getSecretName();
-    console.log('secretName:::>>>', secretName);
     try {
       if (!secretName) {
         console.log(
@@ -53,7 +52,6 @@ export abstract class BaseSecretManager<T> {
       });
 
       const response = await this.client.send(command);
-      console.log('response:::>>>', response);
 
       const secretValue = response.SecretString;
       if (!secretValue) {
@@ -93,7 +91,7 @@ export abstract class BaseSecretManager<T> {
     return now - cachedSecret.timestamp < this.ttl;
   }
 
-  private clearCache() {
+  clearCache() {
     this.cache.clear();
   }
 }
