@@ -1,7 +1,6 @@
 import { CreateOrderOneStockPayLoad } from '../../../api/order/createOrderPayload';
 
 export const mockCreateOrderPayload: CreateOrderOneStockPayLoad = {
-  site_id: process.env.ONESTOCK_SITE_ID as string,
   order: {
     types: ['ffs'],
     date: 1716478616,

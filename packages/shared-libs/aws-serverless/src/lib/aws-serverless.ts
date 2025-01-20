@@ -5,7 +5,6 @@ import {
   EventBridgeClient,
   EventBridgeClientConfig,
   PutEventsCommand,
-  PutEventsResultEntry,
 } from '@aws-sdk/client-eventbridge';
 import { logger } from '@ro-app/pino-logger';
 
@@ -36,19 +35,6 @@ const defaultParams: EventBridgeClientConfig = {
 export const createEventBridgeClient = (params?: EventBridgeClientConfig) => {
   const finalParams = { ...defaultParams, ...params };
   return new EventBridgeClient(finalParams);
-};
-
-export const putEvent = async (
-  command: PutEventsCommand,
-  params?: EventBridgeClientConfig
-) => {
-  try {
-    const client = createEventBridgeClient(params);
-    await client.send(command);
-  } catch (error: unknown) {
-    logger.error(`Error sending event to EventBridge: ${error}`);
-    throw error;
-  }
 };
 
 type BaseEventPayload<T> = {
@@ -84,4 +70,27 @@ export const createBaseEvent = <T extends object>(
       },
     }),
   };
+};
+
+export const createPutEventsCommand = <T extends object>(
+  baseEventPayload: BaseEventPayload<T>
+) => {
+  const event = createBaseEvent(baseEventPayload);
+  return new PutEventsCommand({
+    Entries: [event],
+  });
+};
+
+export const putEvent = async (
+  command: PutEventsCommand,
+  params?: EventBridgeClientConfig
+) => {
+  try {
+    const client = createEventBridgeClient(params);
+    const result = await client.send(command);
+    return result;
+  } catch (error: unknown) {
+    logger.error(`Error sending event to EventBridge: ${error}`);
+    throw error;
+  }
 };

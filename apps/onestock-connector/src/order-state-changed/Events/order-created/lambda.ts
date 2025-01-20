@@ -1,6 +1,6 @@
 import middy from '@middy/core';
 import { APIGatewayEvent } from 'aws-lambda';
-import { AppResponse, AppContext, app } from './app';
+import { AppResponse, AppContext, OrderCreatedEventData, app } from './app';
 import {
   loggerMiddleware,
   validateEventPayloadMiddleware,
