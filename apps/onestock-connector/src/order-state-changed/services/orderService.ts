@@ -33,11 +33,13 @@ export class OrderService {
   async processOrderCreatedEvent(orderId: string) {
     try {
       const order = await this.oneStockClient.getOrder(orderId);
-      logger.info('Successfully retrieved order:', order);
-      logger.info('OrderService.processOrderCreatedEvent', order);
+      logger.info(
+        'Successfully retrieved order-OrderService.processOrderCreatedEvent:',
+        order
+      );
 
       const enrichedData = mapOneStockOrderResponseToOrderCreatedEvent(order);
-      console.log('enrichedData:::>>>', enrichedData);
+
       return enrichedData;
     } catch (error) {
       console.log('error:::>>>', error);

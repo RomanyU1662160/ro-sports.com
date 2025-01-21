@@ -2,7 +2,7 @@ import { z } from 'zod';
 import { ContactZ, CustomerZ } from '../_common/contact';
 
 export const CreateOrderOneStockPayLoadZ = z.object({
-  site_id: z.string(),
+  // site_id: z.string(),
   order: z.object({
     id: z.string().optional(),
     types: z.array(z.string()),

@@ -21,6 +21,7 @@ export class OneStockClient extends BaseHttpClient {
   }
 
   protected handleError(error: AxiosError): never {
+    console.log('error:::>>>', error);
     logger.error(`Error in OneStockClient ${error}`);
     logger.error(`OneStockClient::HandleError- ${error.message}`);
     throw new OneStockError({
@@ -106,15 +107,15 @@ export class OneStockClient extends BaseHttpClient {
   }
 
   public async getOrder(orderId: string): Promise<OneStockGetOrderResponse> {
+    const siteId = process.env.ONESTOCK_SITE_ID;
     try {
       const response = await this.request<OneStockGetOrderResponse>({
-        url: `/orders/${orderId}`,
         method: 'GET',
-        data: {
-          site_id: process.env.ONESTOCK_SITE_ID,
+        url: `/orders/${orderId}`,
+        data: JSON.stringify({
+          site_id: siteId,
           fields: [
             'id',
-            // "creation_date",
             'types',
             'date',
             'last_update',
@@ -138,7 +139,7 @@ export class OneStockClient extends BaseHttpClient {
             'delivery_promise',
             'current_delivery_etas',
           ],
-        },
+        }),
       });
       return response;
     } catch (error) {
@@ -151,7 +152,7 @@ export class OneStockClient extends BaseHttpClient {
     data: CreateOrderOneStockPayLoad['order']
   ): Promise<void> {
     const APIGateWayURL = process.env.AWS_API_GATEWAY_URL;
-    // this simulate the one stock webhook call when the order is created on onestock on the frontend
+    // this will call the lambda function to simulate the one stock webhook call when the order is created on onestock on the frontend
     this.request({
       method: 'POST',
       url: APIGateWayURL,
@@ -164,12 +165,13 @@ export class OneStockClient extends BaseHttpClient {
   public async createOrder(
     payload: CreateOrderOneStockPayLoad
   ): Promise<CreateOrderResponse> {
+    const siteId = process.env.ONESTOCK_SITE_ID;
     try {
       const response = await this.request<CreateOrderResponse>({
         url: '/orders',
         method: 'POST',
         data: JSON.stringify({
-          site_id: payload.site_id,
+          site_id: siteId,
           order: payload.order,
         }),
       });
